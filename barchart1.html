@@ -1,0 +1,354 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta charset="UTF-8">
+        <title>Column Chart</title>
+        <script id="sap-ui-bootstrap" 
+                type="text/javascript"
+                src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+                data-sap-ui-theme="sap_bluecrystal"
+                data-sap-ui-libs="sap.m"
+                data-sap-ui-xx-bindingSyntax="complex"
+        >
+        </script>
+
+		<!-- Audit details of a car company -->
+        <!-- XML-based view definition -->
+        <script id="chartView" type="sapui5/xmlview">
+<mvc:View height="100%" width="100%"
+  controllerName="sap.viz.sample.Column.Column"
+  xmlns:viz="sap.viz.ui5.controls" 
+  xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+    <ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" focusable="true">
+       <viz:Popover id="idPopOver"></viz:Popover>
+       <viz:VizFrame id="idVizFrameColumn" uiConfig="{applicationSet:'fiori'}" vizType="column" selectData="onSelect" width="100%" height="700px">
+       </viz:VizFrame>
+    </ScrollContainer>
+</mvc:View>
+        </script>
+
+        <script>
+            // Controller definition
+sap.ui.controller("sap.viz.sample.Column.Column", {
+    onInit: function(oEvent) {
+        var oVizFrame = this.getView().byId("idVizFrameColumn");
+        var oPopOver = this.getView().byId("idPopOver");
+		var aData = [{
+							"Year": "Jan 2010",
+							"City": "Bengaluru",
+							"Profit": 400.56,
+							"Net Amt": 2234.60,
+							"Units Available": 14056,
+							"Gross Amt": 139033.42,
+							"Revenue": 207685.42,
+							"Units Sold": 5332
+						}, {
+							"Year": "Jan 2010",
+							"City": "Mumbai",
+							"Profit": 191.82,
+							"Net Amt": 175.78,//Unit Price
+							"Units Available": 2049,
+							"Gross Amt": 17599.08,    //Cost
+							"Revenue": 22288.10,
+							"Units Sold": 650
+						}, {
+							"Year": "Jan 2010",
+							"City": "New Delhi",
+							"Profit": 191.82,
+							"Net Amt": 175.78,
+							"Units Available": 3049,
+							"Gross Amt": 17599.08,
+							"Revenue": 22288.10,
+							"Units Sold": 1632
+						},{
+							"Year": "Mar 2011",
+							"City": "Bengaluru",
+							"Profit": 500.56,
+							"Net Amt": 2256.60,
+							"Units Available": 15056,
+							"Gross Amt": 139033.42,
+							"Revenue": 207685.42,
+							"Units Sold": 5332
+						}, {
+							"Year": "Mar 2011",
+							"City": "Mumbai",
+							"Profit": 265.82,
+							"Net Amt": 355.78,//Unit Price
+							"Units Available": 1049,
+							"Gross Amt": 17599.08,    //Cost
+							"Revenue": 22288.10,
+							"Units Sold": 650
+						}, {
+							"Year": "Mar 2011",
+							"City": "New Delhi",
+							"Profit": 154.82,
+							"Net Amt": 175.78,
+							"Units Available": 2049,
+							"Gross Amt": 17599.08,
+							"Revenue": 22288.10,
+							"Units Sold": 1632
+						},{
+							"Year": "Mar 2012",
+							"City": "Bengaluru",
+							"Profit": 600.56,
+							"Net Amt": 2256.60,
+							"Units Available": 11056,
+							"Gross Amt": 129033.42,
+							"Revenue": 107685.42,
+							"Units Sold": 5332
+						}, {
+							"Year": "Mar 2012",
+							"City": "Mumbai",
+							"Profit": 565.82,
+							"Net Amt": 355.78,
+							"Units Available": 1049,
+							"Gross Amt": 17599.08,   
+							"Revenue": 22288.10,
+							"Units Sold": 599
+						}, {
+							"Year": "Mar 2012",
+							"City": "New Delhi",
+							"Profit": 454.82,
+							"Net Amt": 175.78,
+							"Units Available": 2049,
+							"Gross Amt": 17599.08,
+							"Revenue": 22288.10,
+							"Units Sold": 1932
+						},{
+							"Year": "Mar 2013",
+							"City": "Bengaluru",
+							"Profit": 100.56,
+							"Net Amt": 2256.60,
+							"Units Available": 11056,
+							"Gross Amt": 129033.42,
+							"Revenue": 107685.42,
+							"Units Sold": 332
+						}, {
+							"Year": "Mar 2013",
+							"City": "Mumbai",
+							"Profit": 365.82,
+							"Net Amt": 355.78,//Unit Price
+							"Units Available": 1049,
+							"Gross Amt": 17599.08,    //Cost
+							"Revenue": 22288.10,
+							"Units Sold": 599
+						}, {
+							"Year": "Mar 2013",
+							"City": "New Delhi",
+							"Profit": 454.82,
+							"Net Amt": 175.78,
+							"Units Available": 2049,
+							"Gross Amt": 17599.08,
+							"Revenue": 22288.10,
+							"Units Sold": 1932
+						},{
+							"Year": "Mar 2014",
+							"City": "Bengaluru",
+							"Profit": 600.56,
+							"Net Amt": 2256.60,
+							"Units Available": 11056,
+							"Gross Amt": 129033.42,
+							"Revenue": 107685.42,
+							"Units Sold": 5332
+						}, {
+							"Year": "Mar 2014",
+							"City": "Mumbai",
+							"Profit": 565.82,
+							"Net Amt": 355.78,//Unit Price
+							"Units Available": 1049,
+							"Gross Amt": 17599.08,    //Cost
+							"Revenue": 22288.10,
+							"Units Sold": 599
+						}, {
+							"Year": "Mar 2014",
+							"City": "New Delhi",
+							"Profit": 454.82,
+							"Net Amt": 175.78,
+							"Units Available": 2049,
+							"Gross Amt": 17599.08,
+							"Revenue": 22288.10,
+							"Units Sold": 1932
+						},{
+							"Year": "Mar 2015",
+							"City": "Bengaluru",
+							"Profit": 400.56,
+							"Net Amt": 2234.60,
+							"Units Available": 14056,
+							"Gross Amt": 139033.42,
+							"Revenue": 207685.42,
+							"Units Sold": 5332
+						}, {
+							"Year": "Mar 2015",
+							"City": "Mumbai",
+							"Profit": 191.82,
+							"Net Amt": 175.78,//Unit Price
+							"Units Available": 2049,
+							"Gross Amt": 17599.08,    //Cost
+							"Revenue": 22288.10,
+							"Units Sold": 650
+						}, {
+							"Year": "Mar 2015",
+							"City": "New Delhi",
+							"Profit": 191.82,
+							"Net Amt": 175.78,
+							"Units Available": 3049,
+							"Gross Amt": 17599.08,
+							"Revenue": 22288.10,
+							"Units Sold": 1632
+						},{
+							"Year": "Mar 2016",
+							"City": "Bengaluru",
+							"Profit": 900.25,
+							"Net Amt": 2234.60,
+							"Units Available": 16056,
+							"Gross Amt": 159033.42,
+							"Revenue": 307685.42,
+							"Units Sold": 9332
+						}, {
+							"Year": "Mar 2016",
+							"City": "Mumbai",
+							"Profit": 491.82,
+							"Net Amt": 175.78,
+							"Units Available": 2049,
+							"Gross Amt": 17599.08,  
+							"Revenue": 22288.10,
+							"Units Sold": 550
+						}, {
+							"Year": "Mar 2016",
+							"City": "New Delhi",
+							"Profit": 291.82,
+							"Net Amt": 175.78,
+							"Units Available": 3049,
+							"Gross Amt": 17599.08,
+							"Revenue": 22288.10,
+							"Units Sold": 1632
+						}];
+						// Create instance of JSON model
+						var model = new sap.ui.model.json.JSONModel();
+							model.setData({
+								modelData: {
+								carsData : []
+								}
+							});
+							// Load JSON in model
+							sap.ui.getCore().setModel(model);
+							sap.ui.getCore().getModel().setProperty("/modelData/carsData", aData)
+							var oDataset = new sap.viz.ui5.data.FlattenedDataset({
+								dimensions: [{
+									name: "Year",
+									value: "{Year}"
+								}, {
+									name: 'City',
+									value: '{City}'
+								}],
+								measures: [{
+									name: 'Profit',
+									value: '{Profit}'
+								}],
+								data: {
+									path: "/modelData/carsData"
+								}
+							});
+							//set the dataset to the VizFrame
+							oVizFrame.setDataset(oDataset);
+							oVizFrame.setModel(model);
+							
+							//Feed the values
+							var feedValueAxis = new sap.viz.ui5.controls.common.feeds.FeedItem({
+									'uid': "valueAxis",
+									'type': "Measure",
+									'values': ["Profit"]
+								}),
+								feedCategoryAxis = new sap.viz.ui5.controls.common.feeds.FeedItem({
+									'uid': "categoryAxis",
+									'type': "Dimension",
+									'values': ["Year"]
+								}),
+								feedColor = new sap.viz.ui5.controls.common.feeds.FeedItem({
+									'uid': "color",
+									'type': "Dimension",
+									'values': ["City"]
+								});
+
+								oVizFrame.setVizProperties({
+									plotArea: {
+										dataLabel: {
+											visible: true,
+											formatString: "#,##0"
+										}
+									},
+									legend: {
+										title: {
+											visible: false
+										}
+									},
+
+									title: {
+										visible: true,
+										text: 'Profit by City and Year'
+									}
+								});
+								oVizFrame.addFeed(feedValueAxis);
+								oVizFrame.addFeed(feedCategoryAxis);
+								oVizFrame.addFeed(feedColor);
+								oPopOver.connect(oVizFrame.getVizUid());
+							},
+							onSelect(oEvent){
+								 var oGetData = oEvent.getParameter("data");
+								 var oSelectData = oGetData[0].data;
+								 var oModel = sap.ui.getCore().getModel().getProperty("/modelData/selectedData");
+								 if(!oModel)
+								 {
+									var oModel = [];
+									oModel.push(oSelectData);
+								 }
+								 else
+								 {
+									oModel.push(oSelectData);
+								 }
+								 sap.ui.getCore().getModel().setProperty("/modelData/selectedData", oModel);
+								 alert(JSON.stringify(oModel));
+							}
+						});
+						// Instantiate the View, assign a model and display
+						var oView = sap.ui.xmlview({
+							viewContent: jQuery('#chartView').html()
+						});
+						//oView.placeAt('content');
+						
+						var page = sap.m.Page({
+							title:"Sales Details",
+							showNavButton:true,
+										navButtonTap:function(){
+											window.open("s.html","_self")
+										},
+							content: oView,
+							footer : new sap.m.Toolbar({
+								
+								content: [
+									new sap.m.ToolbarSpacer(),
+									new sap.m.Button({
+										text : "Employee Details",
+										type:"Emphasized",
+										/*press: function(){
+										    window.open(" ","_blank")
+										}*/
+									}),
+									new sap.m.Button({
+										text : "Cancel",
+										type:"Reject"
+									})
+								]
+							})
+						});
+		var app = sap.m.App();
+		app.addPage(page);
+		
+		app.placeAt("content");
+				</script>
+			</head>
+		<body class="sapUiBody" role="application">
+			<div id="content"></div>
+		</body>
+</html>
