@@ -1,2 +1,2 @@
 # Bar-Chart
-Graph representing the yearly sales details of some company
+Graph representing the yearly sales details of a company
