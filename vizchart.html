@@ -10,10 +10,9 @@
         data-sap-ui-theme="sap_bluecrystal"
         data-sap-ui-libs="sap.ui.commons,sap.ui.ux3, sap.ui.table,sap.m,sap.viz">
 </script>
-
-
  
 <script>
+//Create instance of JSON model
   var oModel = new sap.ui.model.json.JSONModel({
   businessData : [
   {Companies :"Audi",revenue:1010.87,profit:-141.25},
@@ -67,12 +66,9 @@
   oBarChart.setModel(oModel);
   oBarChart.placeAt("content");
 </script>
- 
- 
 </head>
 <body class="sapUiBody" role="application"
   style="width: 100%; height: 100%; overflow-y: hidden; overflow-x: auto;">
-  <div id="content"
-  style="width: 100%; height: 100%; overflow-y: hidden; overflow-x: auto;"></div>
+  <div id="content" style="width: 100%; height: 100%; overflow-y: hidden; overflow-x: auto;"></div>
 </body>
 </html>
